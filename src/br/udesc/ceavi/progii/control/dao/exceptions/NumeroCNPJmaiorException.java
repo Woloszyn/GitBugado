@@ -5,6 +5,8 @@
  */
 package br.udesc.ceavi.progii.control.dao.exceptions;
 
+import javax.swing.JOptionPane;
+
 /**
  * Esta classe é uma exceção causada caso digite numeros à mais no campo CNPJ
  * @author Eduardo Woloszyn
@@ -15,6 +17,7 @@ public class NumeroCNPJmaiorException extends Exception{
 
     public NumeroCNPJmaiorException() {
         super("Número de CNPJ inválido");
+        JOptionPane.showMessageDialog(null, "Numero de cpf inválido","Erro",JOptionPane.WARNING_MESSAGE);
     }
 
     public NumeroCNPJmaiorException(String message, Throwable cause) {
