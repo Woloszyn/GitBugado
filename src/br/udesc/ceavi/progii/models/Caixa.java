@@ -9,7 +9,7 @@ package br.udesc.ceavi.progii.models;
  *Esta classe define os métodos que o Caixa irá gerenciar
  * @author Eduardo Woloszyn, Leonardo Tadeu Jaques Steinke, Bruno Trindade e Silva, Denilson Laucsen
  * @version 1.0
- * @since 23/03/2018
+ * @since 23/03/2018 teste
  */
 public class Caixa {
     private double saldo ; 
@@ -49,6 +49,8 @@ public class Caixa {
         }
         final Caixa other = (Caixa) obj;
         if (Double.doubleToLongBits(this.saldo) != Double.doubleToLongBits(other.saldo)) {
+            System.out.println("teste");
+            
             return false;
         }
         return true;
