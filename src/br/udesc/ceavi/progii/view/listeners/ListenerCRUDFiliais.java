@@ -5,10 +5,16 @@
  */
 package br.udesc.ceavi.progii.view.listeners;
 
+import br.udesc.ceavi.progii.control.dao.exceptions.NumeroCNPJmaiorException;
+import br.udesc.ceavi.progii.control.dao.interfaces.DAO;
+import br.udesc.ceavi.progii.control.dao.interfaces.FiliaisDAO;
 import br.udesc.ceavi.progii.models.Filial;
 import br.udesc.ceavi.progii.view.FrameCRUD;
+import br.udesc.ceavi.progii.view.FrameCRUDFiliais;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -25,7 +31,7 @@ public class ListenerCRUDFiliais {
     
     private FrameCRUD frame ;
 
-    public ListenerCRUDFiliais(Filial filial, FrameCRUD frame) {
+    ListenerCRUDFiliais(Filial filial, FrameCRUD frame) {
         this.filial = filial;
         this.frame = frame;
         
@@ -86,9 +92,18 @@ public class ListenerCRUDFiliais {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            //método control para adicionar campos ao banco de dados
-            
-            frame.limparCampos();
+            try {
+                //método control para adicionar campos ao banco de dados
+                filial = ((FrameCRUDFiliais)frame).getFilial();
+                DAO dao = new FiliaisDAO();
+                
+                dao.btnGravar(dao);
+                
+                
+                frame.limparCampos();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,ex.getMessage());
+            }
         }
     }
     

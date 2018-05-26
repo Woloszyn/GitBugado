@@ -5,6 +5,8 @@
  */
 package br.udesc.ceavi.progii.control.dao.interfaces;
 
+import br.udesc.ceavi.progii.control.dao.exceptions.NumeroCNPJmaiorException;
+
 /**
  * Interface para tratamento de exceções do tipo CRUD
  * @author Eduardo Woloszyn

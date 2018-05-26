@@ -28,9 +28,11 @@ public class FiliaisDAO implements DAO<Filial> {
 
     @Override
     public boolean btnGravar(Filial obj) throws NumeroCNPJmaiorException {
-        if (obj.getCnpj().length()!= 14) {
-            throw new NumeroCNPJmaiorException();
-        } 
+        if (obj.getCnpj().length()> 14) {
+            throw new NumeroCNPJmaiorException(" você digitou números a mais");
+        }  else if (obj.getCnpj().length()<14) {
+            throw new NumeroCNPJmaiorException(" você digitou numeros a menos");
+        }
         
         
     return true ;

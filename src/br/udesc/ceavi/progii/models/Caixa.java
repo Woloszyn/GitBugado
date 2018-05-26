@@ -49,7 +49,6 @@ public class Caixa {
         }
         final Caixa other = (Caixa) obj;
         if (Double.doubleToLongBits(this.saldo) != Double.doubleToLongBits(other.saldo)) {
-            System.out.println("teste");
             
             return false;
         }

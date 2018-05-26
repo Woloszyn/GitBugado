@@ -176,5 +176,10 @@ public class FrameCRUDFornecedor extends FrameCRUD {
     public void carregarCampos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public void setFornecedores(Fornecedores fornecedor) {
+        this.fornecedores = fornecedor;
+        
+    }
     
 }

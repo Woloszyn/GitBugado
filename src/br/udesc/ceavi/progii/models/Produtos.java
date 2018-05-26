@@ -34,6 +34,10 @@ public class Produtos {
         this.oMercado = oMercado;
     }
 
+    public Produtos() {
+        
+    }
+
     public int getId() {
         return id;
     }

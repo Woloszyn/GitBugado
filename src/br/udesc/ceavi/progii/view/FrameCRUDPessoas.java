@@ -206,6 +206,14 @@ public  class FrameCRUDPessoas extends FrameCRUD {
     public void carregarCampos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public Pessoa getPessoa() {
+        return this.pessoa ;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa ;
+    }
         
     
     

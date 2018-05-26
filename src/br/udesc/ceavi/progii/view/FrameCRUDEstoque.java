@@ -114,8 +114,15 @@ public  class FrameCRUDEstoque extends FrameCRUD {
     public void carregarCampos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public void setProduto(Produtos produto) {
+       this.produtos = produto ;
+               
+    }
         
-    
+    public Produtos getProduto(Produtos produto) {
+      return this.produtos;  
+    }
     
     
 }

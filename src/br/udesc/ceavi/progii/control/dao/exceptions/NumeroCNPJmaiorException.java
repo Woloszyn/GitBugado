@@ -15,10 +15,16 @@ import javax.swing.JOptionPane;
  */
 public class NumeroCNPJmaiorException extends Exception{
 
-    public NumeroCNPJmaiorException() {
-        super("Número de CNPJ inválido");
-        JOptionPane.showMessageDialog(null, "Numero de cpf inválido","Erro",JOptionPane.WARNING_MESSAGE);
+    public NumeroCNPJmaiorException(String message) {
+        super("Número de CNPJ inválido "+message);
     }
+
+    @Override
+    public String getMessage() {
+        return super.getMessage(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 
     public NumeroCNPJmaiorException(String message, Throwable cause) {
         super(message, cause);
