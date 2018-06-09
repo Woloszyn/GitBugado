@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.LayoutManager;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -117,15 +118,49 @@ public class FrameCRUDFiliais extends FrameCRUD{
 
     @Override
     public void limparCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        tfNome.setText("");
+        tfCNPJ.setText("");
+        panelEndereco.getTfBairro().setText("");
+        panelEndereco.getTfCEP().setText("");
+        panelEndereco.getTfCidade().setText("");
+        panelEndereco.getTfNumero().setText("");
+        panelEndereco.getTfRua().setText("");
+        
+    }
+
+    public JTextField getTfNome() {
+        return tfNome;
+    }
+
+
+    public JTextField getTfCNPJ() {
+        return tfCNPJ;
+    }
+
+    
+
+    public PanelEndereco getPanelEndereco() {
+        return panelEndereco;
+    }
+
+    public void setPanelEndereco(PanelEndereco panelEndereco) {
+        this.panelEndereco = panelEndereco;
     }
 
     @Override
     public void carregarCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+     
     }
 
     public Filial getFilial() {
+     filial.setBairro(panelEndereco.getTfBairro().getText());
+     filial.setCep(panelEndereco.getTfCEP().getText());
+     filial.setCidade(panelEndereco.getTfCidade().getText());
+     filial.setCnpj(getTfCNPJ().getText());
+     filial.setNome(getTfNome().getText());
+     filial.setNumero(Integer.parseInt(panelEndereco.getTfNumero().getText()) ) ;
+     filial.setRua(panelEndereco.getTfRua().getText());
         return filial;
     }
 

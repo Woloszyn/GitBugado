@@ -5,7 +5,8 @@
  */
 package br.udesc.ceavi.progii.view.listeners;
 
-import br.udesc.ceavi.progii.control.dao.exceptions.NumeroCNPJmaiorException;
+import br.udesc.ceavi.progii.control.dao.exceptions.FilialJpaController;
+import br.udesc.ceavi.progii.control.dao.exceptions.NumeroCnpjInvalido;
 import br.udesc.ceavi.progii.control.dao.interfaces.DAO;
 import br.udesc.ceavi.progii.control.dao.interfaces.FiliaisDAO;
 import br.udesc.ceavi.progii.models.Filial;
@@ -15,8 +16,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
 
 /**
  * Listener para a tela de Filiais
@@ -27,9 +32,11 @@ import javax.swing.JOptionPane;
 public class ListenerCRUDFiliais {
     private static ListenerCRUDFiliais instancia ;
     
+    
     private Filial filial ;
     
     private FrameCRUD frame ;
+    FilialJpaController jpaFilial ;
 
     ListenerCRUDFiliais(Filial filial, FrameCRUD frame) {
         this.filial = filial;
@@ -91,20 +98,39 @@ public class ListenerCRUDFiliais {
     private class btGravarActionListener implements ActionListener {
 
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent ae) {
+            // método para gravar 
+            DAO dao = new FiliaisDAO();
             try {
-                //método control para adicionar campos ao banco de dados
-                filial = ((FrameCRUDFiliais)frame).getFilial();
-                DAO dao = new FiliaisDAO();
+            filial = ((FrameCRUDFiliais)frame).getFilial();
                 
-                dao.btnGravar(dao);
-                
-                
-                frame.limparCampos();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null,ex.getMessage());
+            } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null,"Campo Número não pode ser letra","Erro",JOptionPane.ERROR_MESSAGE);
             }
+           
+            try {
+                dao.btnGravar(filial);
+                EntityManagerFactory objManagerFactory = Persistence.createEntityManagerFactory("GerenciadorSupermercadoPU");
+                EntityManager manager = objManagerFactory.createEntityManager();
+                jpaFilial = new FilialJpaController(objManagerFactory);
+                jpaFilial.create(filial);
+                Filial findFilial = jpaFilial.findFilial(JOptionPane.showInputDialog("Insira o cnpj aqui"));
+                JOptionPane.showMessageDialog(null,findFilial.toString());
+                frame.limparCampos();
+                
+            // se os dados estiverem corretos irá gravar, senão irá disparar a exceção
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+                Logger.getLogger(ListenerCRUDFiliais.class.getName()).log(Level.SEVERE, null, ex);
+                
+            }
+            
+            
         }
+        
+        
+        
+        
     }
     
     
