@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.udesc.ceavi.progii.control.dao.exceptions;
+package br.udesc.ceavi.progii.control.jpacontroller;
 
-import br.udesc.ceavi.progii.control.dao.exceptions.exceptions.NonexistentEntityException;
-import br.udesc.ceavi.progii.models.Caixa;
+import br.udesc.ceavi.progii.control.jpacontroller.exceptions.NonexistentEntityException;
+import br.udesc.ceavi.progii.control.jpacontroller.exceptions.PreexistingEntityException;
+import br.udesc.ceavi.progii.models.Produtos;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -17,14 +18,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
- *Implementação de todas as funções de uma classe Controller 
+ *
  * @author Eduardo Woloszyn
- * @version 1.0
- * @since 09/06/2018
  */
-public class CaixaJpaController implements Serializable {
+public class ProdutosJpaController implements Serializable {
 
-    public CaixaJpaController(EntityManagerFactory emf) {
+    public ProdutosJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -33,13 +32,18 @@ public class CaixaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Caixa caixa) {
+    public void create(Produtos produtos) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(caixa);
+            em.persist(produtos);
             em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (findProdutos(produtos.getId()) != null) {
+                throw new PreexistingEntityException("Produtos " + produtos + " already exists.", ex);
+            }
+            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -47,19 +51,19 @@ public class CaixaJpaController implements Serializable {
         }
     }
 
-    public void edit(Caixa caixa) throws NonexistentEntityException, Exception {
+    public void edit(Produtos produtos) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            caixa = em.merge(caixa);
+            produtos = em.merge(produtos);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = caixa.getId_saldo();
-                if (findCaixa(id) == null) {
-                    throw new NonexistentEntityException("The caixa with id " + id + " no longer exists.");
+                int id = produtos.getId();
+                if (findProdutos(id) == null) {
+                    throw new NonexistentEntityException("The produtos with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -70,19 +74,19 @@ public class CaixaJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(int id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Caixa caixa;
+            Produtos produtos;
             try {
-                caixa = em.getReference(Caixa.class, id);
-                caixa.getId_saldo();
+                produtos = em.getReference(Produtos.class, id);
+                produtos.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The caixa with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The produtos with id " + id + " no longer exists.", enfe);
             }
-            em.remove(caixa);
+            em.remove(produtos);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -91,19 +95,19 @@ public class CaixaJpaController implements Serializable {
         }
     }
 
-    public List<Caixa> findCaixaEntities() {
-        return findCaixaEntities(true, -1, -1);
+    public List<Produtos> findProdutosEntities() {
+        return findProdutosEntities(true, -1, -1);
     }
 
-    public List<Caixa> findCaixaEntities(int maxResults, int firstResult) {
-        return findCaixaEntities(false, maxResults, firstResult);
+    public List<Produtos> findProdutosEntities(int maxResults, int firstResult) {
+        return findProdutosEntities(false, maxResults, firstResult);
     }
 
-    private List<Caixa> findCaixaEntities(boolean all, int maxResults, int firstResult) {
+    private List<Produtos> findProdutosEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Caixa.class));
+            cq.select(cq.from(Produtos.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -115,20 +119,20 @@ public class CaixaJpaController implements Serializable {
         }
     }
 
-    public Caixa findCaixa(Long id) {
+    public Produtos findProdutos(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Caixa.class, id);
+            return em.find(Produtos.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getCaixaCount() {
+    public int getProdutosCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Caixa> rt = cq.from(Caixa.class);
+            Root<Produtos> rt = cq.from(Produtos.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

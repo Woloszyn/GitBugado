@@ -88,7 +88,7 @@ public class ListenerCRUDEstoque {
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            // metodo para gravar no banco de dados 
+                
                 frameCrud.limparCampos();
             
         }

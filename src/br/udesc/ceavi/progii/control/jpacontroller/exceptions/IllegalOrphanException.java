@@ -1,4 +1,4 @@
-package br.udesc.ceavi.progii.control.dao.exceptions.exceptions;
+package br.udesc.ceavi.progii.control.jpacontroller.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

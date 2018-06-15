@@ -1,4 +1,4 @@
-package br.udesc.ceavi.progii.control.dao.exceptions.exceptions;
+package br.udesc.ceavi.progii.control.jpacontroller.exceptions;
 
 public class PreexistingEntityException extends Exception {
     public PreexistingEntityException(String message, Throwable cause) {

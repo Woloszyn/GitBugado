@@ -1,4 +1,4 @@
-package br.udesc.ceavi.progii.control.dao.exceptions.exceptions;
+package br.udesc.ceavi.progii.control.jpacontroller.exceptions;
 
 public class NonexistentEntityException extends Exception {
     public NonexistentEntityException(String message, Throwable cause) {

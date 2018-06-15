@@ -29,6 +29,7 @@ public class FrameCRUDFornecedor extends FrameCRUD {
     private static final String titulo = "Cadastro de Fornecedor";
     private static final Dimension dimension = new Dimension(400, 400);
     
+    
     private Fornecedores fornecedores;
     
     private Label lbCNPJ;
@@ -172,7 +173,6 @@ public class FrameCRUDFornecedor extends FrameCRUD {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public void carregarCampos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

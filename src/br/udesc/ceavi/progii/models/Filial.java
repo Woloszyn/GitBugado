@@ -35,17 +35,17 @@ public class Filial implements Serializable {
     private String rua ;
     @Column(name="bairro_filial")
     private String bairro ;
-
+    
     public Filial() {
     }
-
+    
     public String getNome() {
         return nome;
     }
-
+    
     public void setNome(String nome) {
         this.nome = nome;
-    }
+}
 
     public String getCnpj() {
         return cnpj;

@@ -5,7 +5,7 @@
  */
 package br.udesc.ceavi.progii.view.listeners;
 
-import br.udesc.ceavi.progii.control.dao.exceptions.FilialJpaController;
+import br.udesc.ceavi.progii.control.jpacontroller.FilialJpaController;
 import br.udesc.ceavi.progii.control.dao.exceptions.NumeroCnpjInvalido;
 import br.udesc.ceavi.progii.control.dao.interfaces.DAO;
 import br.udesc.ceavi.progii.control.dao.interfaces.FiliaisDAO;
@@ -60,6 +60,10 @@ public class ListenerCRUDFiliais {
         
         botao= frame.getPanelBotoesCRUD().getBtnNovo();
         botao.addActionListener(new btNovoActionListener());
+        
+        botao = ((FrameCRUDFiliais)frame).getBtnPesquisa();
+        botao.addActionListener(new btnBusca());
+        
     }
 
     public static ListenerCRUDFiliais getInstancia(Filial filial, FrameCRUD frame) {
@@ -110,12 +114,6 @@ public class ListenerCRUDFiliais {
            
             try {
                 dao.btnGravar(filial);
-                EntityManagerFactory objManagerFactory = Persistence.createEntityManagerFactory("GerenciadorSupermercadoPU");
-                EntityManager manager = objManagerFactory.createEntityManager();
-                jpaFilial = new FilialJpaController(objManagerFactory);
-                jpaFilial.create(filial);
-                Filial findFilial = jpaFilial.findFilial(JOptionPane.showInputDialog("Insira o cnpj aqui"));
-                JOptionPane.showMessageDialog(null,findFilial.toString());
                 frame.limparCampos();
                 
             // se os dados estiverem corretos irá gravar, senão irá disparar a exceção
@@ -133,7 +131,34 @@ public class ListenerCRUDFiliais {
         
     }
     
-    
+    private class btnBusca implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            FiliaisDAO dao = new FiliaisDAO();
+            EntityManagerFactory objManagerFactory = Persistence.createEntityManagerFactory("GerenciadorSupermercadoPU");
+            EntityManager manager = objManagerFactory.createEntityManager();
+            jpaFilial = new FilialJpaController(objManagerFactory);
+            
+            
+            try {
+                dao.btnPesquisar(((FrameCRUDFiliais)frame).getPesquisa());
+            } catch (Exception ex) {
+                Logger.getLogger(ListenerCRUDFiliais.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        try {
+            Filial findFilial = jpaFilial.findFilial(((FrameCRUDFiliais)frame).getPesquisa());
+            filial = findFilial ;
+            ((FrameCRUDFiliais)frame).carregarCampos(filial);
+       } catch (Exception ex) {
+           JOptionPane.showMessageDialog(null,"Filial não encontrada");
+           Logger.getLogger(FiliaisDAO.class.getName()).log(Level.SEVERE, null, ex);
+       }
+            
+        }
+        
+    }
     
     
     
