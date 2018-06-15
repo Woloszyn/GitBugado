@@ -42,6 +42,8 @@ public class FiliaisDAO implements DAO<Filial>{
             throw new NumeroNumeroInvalido("Número não está no intervalo certo");
         } 
         create(obj);
+        
+        
      return true ;   
     }
 
@@ -77,6 +79,7 @@ public class FiliaisDAO implements DAO<Filial>{
        try {
            jpaFilial.create(objeto);
        } catch (Exception ex) {
+           JOptionPane.showMessageDialog(null,ex.getMessage(),"Erro",JOptionPane.ERROR_MESSAGE);
            Logger.getLogger(FiliaisDAO.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
