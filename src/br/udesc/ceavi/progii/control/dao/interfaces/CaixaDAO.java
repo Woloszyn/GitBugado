@@ -50,9 +50,9 @@ public class CaixaDAO implements DAO<Caixa> {
     private void create(Caixa objeto) {
         EntityManagerFactory objManagerFactory = Persistence.createEntityManagerFactory("GerenciadorSupermercadoPU");
                 EntityManager manager = objManagerFactory.createEntityManager();
-                jpaCaixa = new CaixaJpaController()
+                jpaCaixa = new CaixaJpaController(objManagerFactory);
        try {
-           jpaFilial.create(objeto);
+           jpaCaixa.create(objeto);
        } catch (Exception ex) {
            JOptionPane.showMessageDialog(null,ex.getMessage(),"Erro",JOptionPane.ERROR_MESSAGE);
            Logger.getLogger(FiliaisDAO.class.getName()).log(Level.SEVERE, null, ex);
