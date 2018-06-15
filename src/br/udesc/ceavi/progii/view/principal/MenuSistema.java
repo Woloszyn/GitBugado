@@ -16,12 +16,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 /**
- *
+ * Menu bar
  * @author Eduardo Woloszyn
  */
 public class MenuSistema extends JMenuBar {
     private JMenu menuCaixa;
-    
+    //teste
     private JMenu menuEstoque;
     private JMenu menuCadastroPessoa;
     private JMenu menuFiliais;

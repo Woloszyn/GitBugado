@@ -2,7 +2,7 @@
 package br.udesc.ceavi.progii.view.principal;
 
 /**
- * 
+ * Tela principal do sistema
  * @author Eduardo Woloszyn
  */
 public class TelaPrincipal implements Runnable{
@@ -19,7 +19,7 @@ public class TelaPrincipal implements Runnable{
     @Override
     public void run() {
         FrameSistema oframe = new FrameSistema();
-       
+        System.out.println("Teste");
         oframe.setVisible(true);
         
     }

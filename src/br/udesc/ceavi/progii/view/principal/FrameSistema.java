@@ -21,7 +21,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 
 /**
- *
+ * Frame principal
  * @author Eduardo Woloszyn
  */
 public class FrameSistema extends JFrame {
