@@ -55,6 +55,7 @@ import javax.swing.JTextField;
          lbValidade = new Label("Validade:");
          
          tfID = new JTextField();
+         
          tfLote = new JTextField();
          tfNome = new JTextField();
          tfPreco = new JTextField();
@@ -65,7 +66,7 @@ import javax.swing.JTextField;
      }
      private void addComponents(){
          
-         dimensaoPanel = new Dimension(parent.getWidth(), 100);
+         dimensaoPanel = new Dimension(200, 200);
          this.setLayout(layout);
          
         cons = new GridBagConstraints();
@@ -78,7 +79,7 @@ import javax.swing.JTextField;
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 0;
-        cons.gridwidth = 1;
+        cons.gridwidth = 2;
         cons.fill = GridBagConstraints.HORIZONTAL;
         cons.ipadx = 50;
         this.add(tfID, cons);
@@ -93,7 +94,7 @@ import javax.swing.JTextField;
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 1;
-        cons.gridwidth = 1;
+        cons.gridwidth = 2;
         cons.fill = GridBagConstraints.HORIZONTAL;
         cons.ipadx = 50;
         this.add(tfNome, cons);
@@ -108,7 +109,7 @@ import javax.swing.JTextField;
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 2;
-        cons.gridwidth = 1;
+        cons.gridwidth = 2;
         cons.fill = GridBagConstraints.HORIZONTAL;
         cons.ipadx = 50;
         this.add(tfPreco, cons);
@@ -123,7 +124,7 @@ import javax.swing.JTextField;
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 3;
-        cons.gridwidth = 1;
+        cons.gridwidth = 2;
         cons.fill = GridBagConstraints.HORIZONTAL;
         cons.ipadx = 50;
         this.add(tfPreco, cons);
@@ -138,7 +139,7 @@ import javax.swing.JTextField;
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 4;
-        cons.gridwidth = 1;
+        cons.gridwidth = 2;
         cons.fill = GridBagConstraints.HORIZONTAL;
         cons.ipadx = 50;
         this.add(tfQuant, cons);
@@ -153,7 +154,7 @@ import javax.swing.JTextField;
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 4;
-        cons.gridwidth = 1;
+        cons.gridwidth = 2;
         cons.fill = GridBagConstraints.HORIZONTAL;
         cons.ipadx = 50;
         this.add(tfValidade, cons);
@@ -168,11 +169,61 @@ import javax.swing.JTextField;
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 5;
-        cons.gridwidth = 1;
+        cons.gridwidth = 12;
         cons.fill = GridBagConstraints.HORIZONTAL;
         cons.ipadx = 50;
         this.add(tfLote, cons);
          
      }
+
+    public JTextField getTfID() {
+        return tfID;
+    }
+
+    public void setTfID(String tfID) {
+        this.tfID.setText(tfID);
+    }
+
+    public JTextField getTfNome() {
+        return tfNome;
+    }
+
+    public void setTfNome(String tfNome) {
+        this.tfNome.setText(tfNome);
+    }
+
+    public JTextField getTfQuant() {
+        return tfQuant;
+    }
+
+    public void setTfQuant(String tfQuant) {
+        this.tfQuant.setText(tfQuant);
+    }
+
+    public JTextField getTfPreco() {
+        return tfPreco;
+    }
+
+    public void setTfPreco(String tfPreco) {
+        this.tfPreco.setText(tfPreco);
+    }
+
+    public JTextField getTfValidade() {
+        return tfValidade;
+    }
+
+    public void setTfValidade(String tfValidade) {
+        this.tfValidade.setText(tfValidade);
+    }
+
+    public JTextField getTfLote() {
+        return tfLote;
+    }
+
+    public void setTfLote(String tfLote) {
+        this.tfLote.setText(tfLote);
+    }
+     
+     
      
 }
